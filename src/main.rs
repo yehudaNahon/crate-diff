@@ -3,25 +3,26 @@ use fs_extra::dir::CopyOptions;
 use log::{error, info, trace, warn};
 use std::path::PathBuf;
 use structopt::StructOpt;
-/// A basic example
+
+/// A utility for exporting all changed crates between 2 commits to a seperate folder
 #[derive(StructOpt, Debug)]
-#[structopt(name = "basic")]
-struct CratesDiff {
-    /// repository path
+// #[structopt(name = "basic")]
+struct Arguments {
+    /// crates index repo path
     #[structopt(parse(from_os_str))]
     repo: PathBuf,
 
-    /// crates path
+    /// binary storage path containing all crates
     #[structopt(parse(from_os_str))]
     crates: PathBuf,
-
-    /// commit or refvar to start with
-    #[structopt()]
-    starting_commit: String,
 
     /// a directory to copy all exported files to
     #[structopt(parse(from_os_str))]
     output: PathBuf,
+
+    /// src commit or refvar to start with
+    #[structopt()]
+    starting_commit: String,
 
     /// the commit to finish the check with
     #[structopt(default_value = "HEAD")]
@@ -30,7 +31,7 @@ struct CratesDiff {
 
 fn main() {
     env_logger::init();
-    let opt: CratesDiff = CratesDiff::from_args();
+    let opt: Arguments = Arguments::from_args();
 
     let base_src_dir = opt.crates.as_path();
     assert!(base_src_dir.is_dir(), "src folder does not exists");
