@@ -7,8 +7,8 @@ version = "0.1.0"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-crates-index-diff = "7.1.2"
-env_logger = "0.8"
+crates-index-diff = "9"
+simple-log = "1"
 fs_extra = "1.2"
 log = "0.4"
 structopt = "0.3"

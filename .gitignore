@@ -1,2 +1,4 @@
 /target
 crates-mirror
+.DS_Store
+tmp
